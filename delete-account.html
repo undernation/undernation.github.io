@@ -51,8 +51,8 @@
   <ul>
     <li>로그인 계정: Google 또는 Apple 로그인으로 만든 계정과 계정에 저장된 이메일 주소, 이름, 프로필 사진 주소(Google), 계정 식별자</li>
     <li>걸음 기록: 날짜별 걸음 수와 15분 단위 걸음 수, 기기별 15분 단위 걸음 수와 기기를 구분하는 무작위 설치 식별자</li>
-    <li>게임 기록: 코인·뼈다귀, 보유 캐릭터와 애정도, 배경, 꾸미기 아이템 구매 기록, 미션 수령 기록, 뽑기·간식 기록</li>
-    <li>친구 정보: 닉네임, 초대 태그, 친구 관계, 주고받은 초대, 친구에게 보이는 캐릭터와 착용 장식, 캐릭터의 최근 모습, 친구에게 공유한 오늘의 걸음 수, 차단한 친구 (친구의 목록과 다른 이용자의 차단 목록에서도 사라집니다)</li>
+    <li>게임 기록: 코인·뼈다귀, 보유 캐릭터와 애정도, 배경, 꾸미기 아이템 구매 기록, 미션 수령 기록, 뽑기·간식 기록, 선물 수령 기록, 산책 캡슐 구매·결과 기록</li>
+    <li>친구 정보: 친구 프로필(닉네임, 캐릭터와 착용 장식), 초대 태그, 친구 관계, 주고받은 초대, 캐릭터의 최근 모습, 친구에게 공유한 오늘의 걸음 수, 차단한 친구 (친구의 목록과 다른 이용자의 차단 목록에서도 사라집니다)</li>
     <li>주간 랭킹 정보: 랭킹 참여 설정, 랭킹에 보일 캐릭터 선택, 숨긴 참여자, 신고 기록, 공개된 랭킹 자료 (다른 이용자의 숨김·신고 기록에 남은 이 계정의 공개 식별자도 지웁니다)</li>
     <li>걸음 추천 정보: 날짜별 추천 걸음 수, 하루 추천 기록(처음 본 시각과 걸음 수, 좋아요·별로예요 평가와 평가한 시각, 조절)</li>
     <li>서비스 개선과 걸음 추천을 위해 운영자의 분석 서버에 복사한 걸음 기록, 기기 목록, 동기화 점검값, 날짜별 추천과 하루 추천 기록(추천 모델의 학습 기록에는 계정 식별자와 이용자별 기록을 남기지 않습니다)</li>
@@ -63,8 +63,9 @@
   <ul>
     <li>서버의 데이터는 요청 후 지체 없이 삭제하며 보통 1시간 안에 모두 지워집니다. 다른 기기에서 늦게 올라온 기록까지 지우기 위해 한 번 더 확인해 삭제합니다.</li>
     <li>분석 서버의 데이터 전송 대기열에 남아 있던 걸음 기록 사본은 보관 기한이 지나면 자동으로 삭제되며, 삭제 단위 때문에 최대 40일(처리 오류 기록은 최대 100일)까지 남을 수 있습니다. 이 사본은 다른 용도로 쓰지 않습니다.</li>
-    <li>분석 서버는 정기 백업을 두지 않으며, 서버 작업용 임시 백업은 작업 확인 후 7일 안에 삭제합니다.</li>
-    <li>2026년 10월 20일부터 Firebase의 앱 기록은 장애 복구를 위해 최근 7일 동안의 이전 상태가 보관됩니다. 삭제한 계정의 기록도 이 사본에서 7일 뒤 자동으로 사라집니다.</li>
+    <li>장애 복구를 위해 Firebase의 앱 기록과 분석 서버의 데이터를 매일 백업해 Google Cloud Storage(서울 리전)에 두며, 각 백업은 만든 지 7일이 지나면 자동으로 삭제됩니다. 삭제한 계정의 기록도 이렇게 백업에서 사라지고, 그 전에 백업으로 복구하는 경우에도 삭제를 요청한 계정은 다시 삭제해 되살리지 않습니다.</li>
+    <li>서버 작업용 임시 백업은 작업 확인 후 7일 안에 삭제합니다.</li>
+    <li>2026년 11월 4일부터 받는 앱 오류 보고(Firebase Crashlytics)는 계정과 연결하지 않으므로 계정 삭제 때 따로 지우지 않으며, 받은 날부터 90일이 지나면 자동으로 지워집니다.</li>
     <li>삭제가 끝났는지 확인하고 지운 기록이 다시 만들어지지 않게 하려고, 계정 식별자를 되돌릴 수 없게 변환한 값(해시)과 처리 시각만 남깁니다.</li>
     <li>캐릭터 그림처럼 모든 사용자에게 공개된 앱 콘텐츠는 개인 데이터가 아니어서 삭제 대상이 아닙니다.</li>
     <li>기기의 앱 임시 저장 공간에 남은 사본은 앱을 삭제하면 함께 지워집니다. 휴대폰 사진첩에 직접 저장한 사진은 그대로 남습니다.</li>
@@ -77,7 +78,7 @@
   <div class="en">
     <p><strong>Street DangDang Walkers</strong> (developer: LayerCraft Studio). In the iPhone app or Android app version 1.0.36 or later, open the home screen, tap the settings (gear) button, choose <strong>계정 삭제 (Delete account)</strong> and confirm with your Google or Apple account (accounts created with Apple are deleted from the iPhone app, which also revokes the Sign in with Apple link).
     Without the app, email <a href="mailto:gmlcjf287@gmail.com">gmlcjf287@gmail.com</a> from the Google address you signed up with, subject “Account deletion request”. Requests are completed within 10 days.</p>
-    <p>Deleted: the sign-in account (email, name, profile photo URL, account ID), step history (including per-device 15-minute steps and the random install ID that tells your devices apart), game progress, friend data (nickname, invite tag, friendships, invitations, shared daily steps, blocks), weekly ranking data (participation setting, displayed character, hidden players, reports and any public ranking entries, plus references to your public ranking ID in other players' hide/report lists), step recommendation data (daily recommended steps and the daily recommendation log with your ratings) and the copies on our analysis server. Only a one-way hash of the account ID and the processing time are kept to confirm the deletion. Server data is deleted without delay, usually within an hour. Step copies left in the analysis server's transfer queue expire automatically within at most 40 days (100 days for failed records).</p>
+    <p>Deleted: the sign-in account (email, name, profile photo URL, account ID), step history (including per-device 15-minute steps and the random install ID that tells your devices apart), game progress, friend data (nickname, invite tag, friendships, invitations, shared daily steps, blocks), weekly ranking data (participation setting, displayed character, hidden players, reports and any public ranking entries, plus references to your public ranking ID in other players' hide/report lists), step recommendation data (daily recommended steps and the daily recommendation log with your ratings) and the copies on our analysis server. Only a one-way hash of the account ID and the processing time are kept to confirm the deletion. Server data is deleted without delay, usually within an hour. Step copies left in the analysis server's transfer queue expire automatically within at most 40 days (100 days for failed records). Daily backups of the app records and the analysis server (Google Cloud Storage, Seoul) are deleted automatically 7 days after they are made; if a backup is ever restored, accounts whose deletion was requested after it was made are deleted again. From November 4, 2026, app crash reports (Firebase Crashlytics) are not linked to your account and are deleted automatically after 90 days.</p>
   </div>
 </body>
 </html>
